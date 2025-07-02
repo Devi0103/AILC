@@ -1,0 +1,29 @@
+from collections import deque
+
+def bfs(a, b, target):
+    visited = set()
+    q = deque([((0, 0), [])])
+
+    while q:
+        (x, y), path = q.popleft()
+        if (x, y) in visited: continue
+        visited.add((x, y))
+        path = path + [(x, y)]
+        if x == target or y == target:
+            return path
+
+        q.extend([
+            ((a, y), path), ((x, b), path), ((0, y), path), ((x, 0), path),
+            ((min(x + y, a), 0) if x + y <= a else (a, y - (a - x)), path),
+            ((0, min(x + y, b)) if x + y <= b else (x - (b - y), b), path)
+        ])
+    return None
+
+# Example: Jug A = 4L, Jug B = 3L, Target = 2L
+steps = bfs(4, 3, 2)
+
+for s in steps:
+    print(f"Jug A: {s[0]}L, Jug B: {s[1]}L")
+
+
+3rdd
