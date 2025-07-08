@@ -1,0 +1,9 @@
+% match(Pattern, List): true if Pattern matches List.
+
+% Base case: both empty
+match([], []).
+
+% Recursive case: match head and recurse on tail
+match([PHead|PTail], [LHead|LTail]) :-
+    PHead = LHead,           % try to unify current elements
+    match(PTail, LTail).
