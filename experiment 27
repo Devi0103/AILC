@@ -1,0 +1,14 @@
+edge(a, b).
+edge(a, c).
+edge(b, d).
+edge(c, d).
+
+h(b, 2).
+h(c, 1).
+h(d, 0).
+
+bestfs(d, [d]).
+bestfs(Goal, [Node|Path]) :-
+    edge(Node, Next),
+    \+ member(Next, Path),
+    bestfs(Goal, [Next,Node|Path]).
