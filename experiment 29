@@ -1,0 +1,8 @@
+:- dynamic fact/1.
+
+fact(a).
+
+infer(b) :- fact(a).
+
+forward :- infer(X), \+ fact(X), assertz(fact(X)), forward.
+forward.
